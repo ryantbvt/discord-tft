@@ -1,7 +1,5 @@
 ''' General API commands irrelevant to the core functions of the bot '''
 
-import discord
-
 from discord.ext import commands
 from python_utils.logging import logging
 
