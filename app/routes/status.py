@@ -30,11 +30,15 @@ class Status(commands.Cog):
             resp = requests.get(endpoint, headers={
                 'X-Riot-Token': RIOT_TOKEN
             })
-        except Exception as e:
-            logger.error({e})
+            resp.raise_for_status()
 
-        if resp.status_code != 200:
-            logger.error(f'Error: {resp.status_code} when calling {endpoint}')
+        except requests.exceptions.HTTPError as http_err:
+            logger.error(f'HTTP error occurred: {http_err}')  # Log HTTP errors (e.g., 404, 500)
+        except requests.exceptions.RequestException as req_err:
+            logger.error(f'Request exception occurred: {req_err}')  # Log other request-related errors (e.g., connection issues)
+        except Exception as e:
+            logger.error(f'An unexpected error occurred: {e}')  # Log any other exceptions
+            return
 
         status_info = resp.json()
 
@@ -47,7 +51,7 @@ class Status(commands.Cog):
         logger.info('Completed tft-status command')
 
     @commands.command(name='lol-status')
-    async def tft_status(self, ctx):
+    async def lol_status(self, ctx):
         logger.info('lol-status command received')
 
         endpoint = RIOT_URL + '/lol/status/v4/platform-data'
@@ -57,11 +61,15 @@ class Status(commands.Cog):
             resp = requests.get(endpoint, headers={
                 'X-Riot-Token': RIOT_TOKEN
             })
-        except Exception as e:
-            logger.error({e})
+            resp.raise_for_status()
 
-        if resp.status_code != 200:
-            logger.error(f'Error: {resp.status_code} when calling {endpoint}')
+        except requests.exceptions.HTTPError as http_err:
+            logger.error(f'HTTP error occurred: {http_err}')  # Log HTTP errors (e.g., 404, 500)
+        except requests.exceptions.RequestException as req_err:
+            logger.error(f'Request exception occurred: {req_err}')  # Log other request-related errors (e.g., connection issues)
+        except Exception as e:
+            logger.error(f'An unexpected error occurred: {e}')  # Log any other exceptions
+            return
 
         status_info = resp.json()
 
