@@ -1,7 +1,7 @@
 import asyncio
 
 from python_utils.logging import logging
-from routes import startup
+import startup
 
 # create logger
 logger = logging.init_logger()
