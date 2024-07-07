@@ -1,6 +1,7 @@
 import os
 import discord
 
+from discord.ext import commands
 from python_utils.logging import logging
 from utils import args
 from dotenv import load_dotenv
@@ -8,7 +9,7 @@ from dotenv import load_dotenv
 # Create logger
 logger = logging.init_logger()
 
-def run_discord_bot():
+async def run_discord_bot():
     '''
     Description: Runs application
 
@@ -29,13 +30,26 @@ def run_discord_bot():
 
     intents = discord.Intents.default()
     intents.message_content = True
-    client = discord.Client(intents=intents)
+    bot = commands.Bot(command_prefix ='!', intents=intents)
 
-    @client.event
+    # Load cogs
+    initial_extensions = [
+        'routes.general'
+    ]
+
+    for extension in initial_extensions:
+        try:
+            await bot.load_extension(extension)
+            logger.info(f'Loaded extension: {extension}')
+        except Exception as e:
+            logger.error(f'{e}')
+
+    @bot.event
     async def on_ready():
-        print(f'{client.user} is now running')
+        print(f'{bot.user} is now running')
+        logger.info('Discord bot running')
 
-    client.run(discord_token)
+    await bot.start(discord_token)
     
 
 def fetch_tokens(run_type: str):

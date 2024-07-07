@@ -13,7 +13,7 @@ def parse_args():
     Returns:
         args: parsed arguments
     '''
-    logger.info("Parsing logs")
+    logger.info("Parsing args")
 
     parser = argparse.ArgumentParser(
         description="Run application with specific config source"
