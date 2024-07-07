@@ -1,3 +1,5 @@
+import asyncio
+
 from python_utils.logging import logging
 from routes import startup
 
@@ -7,6 +9,7 @@ logger = logging.init_logger()
 # start the application
 logger.info("Starting application...")
 
-startup.run_discord_bot()
+if __name__ == '__main__':
+    asyncio.run(startup.run_discord_bot())
 
-logger.warn('Application stopping')
+logger.warning('Application stopping')
