@@ -33,7 +33,7 @@ async def run_discord_bot():
     # Load cogs
     initial_extensions = [
         'routes.general',
-        'routes.status'
+        'routes.league'
     ]
 
     for extension in initial_extensions:
