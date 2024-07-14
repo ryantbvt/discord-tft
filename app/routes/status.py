@@ -1,4 +1,4 @@
-''' Functions to fetch riot status pages '''
+''' DEPRECATED: Functions to fetch riot status pages '''
 
 import requests
 

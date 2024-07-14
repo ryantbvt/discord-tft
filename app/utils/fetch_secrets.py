@@ -20,9 +20,7 @@ def fetch_tokens(run_type: str):
     logger.info("Running fetch_tokens")
 
     secrets = {
-        "discord_token": None,
-        "riot_token": None,
-        "riot_url": None
+        "discord_token": None
     }
 
     if run_type == "container":
@@ -34,14 +32,10 @@ def fetch_tokens(run_type: str):
 
         load_dotenv()
         DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
-        RIOT_TOKEN = os.getenv('RIOT_TOKEN')
-        RIOT_URL = os.getenv('RIOT_URL')
 
     logger.info("Successfully obtained token")
 
     secrets['discord_token'] = DISCORD_TOKEN
-    secrets['riot_token'] = RIOT_TOKEN
-    secrets['riot_url'] = RIOT_URL
 
     logger.info("Returning secrets")
     return secrets
