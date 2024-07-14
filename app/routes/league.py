@@ -1,6 +1,7 @@
 ''' League related APIs '''
 
 import httpx
+import discord
 
 from discord.ext import commands
 from python_utils.logging import logging
@@ -29,10 +30,12 @@ class LeagueAPI(commands.Cog):
                 logger.info(f'Received champion rotation list')
                 
                 # Format list in 1 message
-                champ_list_str = '\n'.join(f'- {champion}' for champion in champ_list)
-
                 logger.info('Returning champ list to client')
-                await ctx.send(champ_list_str)
+                embed = discord.Embed(title="Free Champion Rotation", description="\n".join(f"- {champion}" for champion in champ_list))
+                await ctx.send(embed=embed)
+                # champ_list_str = '\n'.join(f'- {champion}' for champion in champ_list)
+
+                # await ctx.send(champ_list_str)
 
 
         except httpx.HTTPStatusError as http_err:
