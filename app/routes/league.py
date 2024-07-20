@@ -17,7 +17,7 @@ class LeagueAPI(commands.Cog):
         logger.info('champ-rotation command received')
 
         # TODO: change this to a config
-        endpoint = 'http://localhost:4460/v1/champ-rotation'
+        endpoint = 'http://localhost:4460/v1/lol/champ-rotation'
 
         try:
             logger.info(f'Calling endpoint: {endpoint}')
